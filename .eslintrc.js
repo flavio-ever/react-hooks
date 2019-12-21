@@ -27,17 +27,17 @@ module.exports = {
     'react-hooks'
   ],
   rules: {
-    // Apontar todas as regras que não encontrar como um erro
     'prettier/prettier': 'error',
-    // JSX
     'react/jsx-filename-extension': [
-      // Warn somente se extencoes não forem jsx quanto js
-      'warn',
+    'warn',
       { extensions : ['.jsx', '.js'] }
     ],
+
     'import/prefer-default-export': 'off',
-    'react/state-in-constructor': 'off',
+    'no-params-ressign': 'off',
     'no-console': ['error', { allow: ['tron']}],
-    'no-param-reassign': 'off'
+
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   },
 };
