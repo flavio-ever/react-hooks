@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [tech, setTech] = useState([]);
@@ -8,6 +8,10 @@ function App() {
     setTech([...tech, newTech]);
   }
 
+  /**
+   * useEffect - é executado no inicio e sempre
+   * que uma variavel for modificada.
+   */
   useEffect(() => {
     const storageTech = localStorage.getItem('techs');
 
@@ -20,6 +24,16 @@ function App() {
     localStorage.setItem('techs', JSON.stringify(tech));
   }, [tech]);
 
+  /**
+   * useEffect - A diferença fica por optimizacao,
+   * ele retorna algo sempre que outro
+   * algo modificar em paralelo.
+   * -
+   * Dispensando o re-trabalho toda vez que uma
+   * renderizacão for feita.
+   */
+  const techSize = useMemo(() => tech.length, [tech]);
+
   return (
     <>
       <ul>
@@ -27,6 +41,8 @@ function App() {
           <li key={t}>{t}</li>
         ))}
       </ul>
+      <h3>Você tem {techSize} tecnologias.</h3>
+      <br />
       <input
         type="text"
         value={newTech}
