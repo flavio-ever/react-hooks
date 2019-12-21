@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [tech, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
-  function handleAdd() {
+  /**
+   * useCallback retorna a funcao e evita o re-processamento da mesma
+   */
+  const handleAdd = useCallback(() => {
     setTech([...tech, newTech]);
-  }
+  }, [newTech, tech]);
 
   /**
    * useEffect - é executado no inicio e sempre
